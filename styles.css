@@ -57,18 +57,44 @@ body {
   padding: 24px;
   text-align: center;
   border: 2px solid #e0e0e0; /* 薄いグレーの枠線 */
-  cursor: pointer;           /* マウスを乗せたときに指マークにする（クリックできることを伝えます） */
+  cursor: pointer;           /* マウスを乗せたときに指マークにする */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* アニメーションをなめらかにする設定 */
 }
 
-/* マウスを重ねた（ホバーした）ときの動き */
+/* マウスを重ねた（ホバーした）ときのカード全体の動き */
 .pokemon-card:hover {
   transform: translateY(-8px); /* カードが上に少し浮き上がります */
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* 影を強くして浮いている感を演出 */
   border-color: #ffcb05;      /* 枠線の色をポケモンの黄色に変えます */
 }
 
+/* ホバー時に中の画像が少し大きくなるアニメーション */
+.pokemon-card:hover .pokemon-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
 /* --- 5. カード内の各項目のデザイン --- */
+
+/* 【新機能】アイコン画像エリア */
+.pokemon-icon-wrapper {
+  background-color: #f5f5f5; /* 画像の背景に丸い薄グレーのエリアを作成 */
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 2px solid #f0f0f0;
+}
+
+.pokemon-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  transition: transform 0.2s ease; /* アニメーション用 */
+}
 
 /* 図鑑番号（例: #001） */
 .pokemon-no {
@@ -102,23 +128,11 @@ body {
   margin: 2px;
 }
 
-/* --- 【新機能】タイプごとの背景色 --- */
-.type-くさ {
-  background-color: #4fc337; /* みどり */
-}
-
-.type-どく {
-  background-color: #a040a0; /* 紫 */
-}
-
-.type-ほのお {
-  background-color: #ff9741; /* オレンジ */
-}
-
-.type-でんき {
-  background-color: #f6d235; /* 黄色 */
-  color: #333333;            /* 文字が見えやすいように文字色を黒に */
-}
+/* タイプごとの背景色 */
+.type-くさ { background-color: #4fc337; }
+.type-どく { background-color: #a040a0; }
+.type-ほのお { background-color: #ff9741; }
+.type-でんき { background-color: #f6d235; color: #333333; }
 
 /* ポケモンの特徴（説明文） */
 .pokemon-description {
@@ -129,7 +143,7 @@ body {
   border-radius: 8px;
 }
 
-/* --- 6. 【新機能】詳細ページ用のデザイン --- */
+/* --- 6. 詳細ページ用のデザイン --- */
 .detail-container {
   width: 100%;
   max-width: 500px;
@@ -162,6 +176,26 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   border: 2px solid #e0e0e0;
   text-align: center;
+}
+
+/* 【新機能】詳細画面の大きめの画像エリア */
+.detail-icon-wrapper {
+  background-color: #f5f5f5;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 3px solid #e3350d; /* 詳細画面はテーマカラーの赤枠 */
+}
+
+.detail-icon {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
 }
 
 /* 高さ・重さ情報 */
@@ -226,12 +260,12 @@ body {
 
 /* ゲージバー本体 */
 .stat-bar {
-  background-color: #30a7d7; /* 基本カラー：水色 */
+  background-color: #30a7d7;
   height: 100%;
   border-radius: 6px;
 }
 
-/* HPや攻撃などのステータスバーを少し色分け（余力があれば） */
+/* ステータスバーの色分け */
 .stat-row:nth-child(2) .stat-bar { background-color: #ff5959; } /* HP */
 .stat-row:nth-child(3) .stat-bar { background-color: #f5ac78; } /* こうげき */
 .stat-row:nth-child(4) .stat-bar { background-color: #fae078; } /* ぼうぎょ */

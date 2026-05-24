@@ -5,7 +5,7 @@
 */
 
 // --- 1. ポケモンデータの準備 (オブジェクトの配列) ---
-// db/seeds のデータ（サンムーン時点）を参照して、詳細情報（高さ、重さ、種族値）を追加しました。
+// 各オブジェクトの id は、画像のファイル名（例: 1.png なら id: 1）に対応しています。
 const pokemonList = [
   {
     id: 1,
@@ -64,11 +64,9 @@ const pokemonList = [
 const container = document.getElementById("pokemon-container");
 
 // --- 3. タイプバッジのHTMLを作る補助用の関数 ---
-// タイプの配列（例: ["くさ", "どく"]）を受け取り、バッジのHTMLを作って返します。
 function createTypeBadges(types) {
   let badgeHtml = "";
   types.forEach((type) => {
-    // styles.css に定義した「type-くさ」や「type-どく」というクラス名を動的に当てはめます。
     badgeHtml += `<span class="pokemon-type type-${type}">${type}</span> `;
   });
   return badgeHtml;
@@ -79,9 +77,12 @@ function showListView() {
   let htmlContent = "";
 
   pokemonList.forEach((pokemon) => {
-    // カード全体に onclick 属性をつけて、クリックされたら詳細画面 showDetailView を呼ぶようにします。
+    // フォルダ内のアイコン画像 (例: pokemon_icon/1.png) を参照する <img> タグを追加しました。
     htmlContent += `
       <div class="pokemon-card" onclick="showDetailView(${pokemon.id})">
+        <div class="pokemon-icon-wrapper">
+          <img src="pokemon_icon/${pokemon.id}.png" alt="${pokemon.name}のアイコン" class="pokemon-icon">
+        </div>
         <div class="pokemon-no">${pokemon.no}</div>
         <h2 class="pokemon-name">${pokemon.name}</h2>
         <div class="pokemon-types">${createTypeBadges(pokemon.types)}</div>
@@ -98,7 +99,7 @@ function showDetailView(pokemonId) {
   // クリックされたIDと一致するポケモンのデータを探します。
   const pokemon = pokemonList.find((p) => p.id === pokemonId);
 
-  // 種族値のパーセンテージ幅を計算します（最大値を150として割合を計算、グラフがはみ出さないようにするため）
+  // 種族値のパーセンテージ幅を計算します（最大値を150として割合を計算）
   const maxStatLimit = 150;
   const hpPercent = (pokemon.stats.hp / maxStatLimit) * 100;
   const attackPercent = (pokemon.stats.attack / maxStatLimit) * 100;
@@ -110,10 +111,14 @@ function showDetailView(pokemonId) {
   // 詳細表示用のHTMLを組み立てます。
   const htmlContent = `
     <div class="detail-container">
-      <!-- 一覧に戻るボタン。クリックしたら一覧画面を表示する関数 showListView() を実行します -->
+      <!-- 一覧に戻るボタン -->
       <button class="back-button" onclick="showListView()">← 図鑑一覧に戻る</button>
       
       <div class="detail-card">
+        <!-- 詳細画面にも大きめのアイコン画像を表示します -->
+        <div class="detail-icon-wrapper">
+          <img src="pokemon_icon/${pokemon.id}.png" alt="${pokemon.name}のアイコン" class="detail-icon">
+        </div>
         <div class="pokemon-no">${pokemon.no}</div>
         <h2 class="pokemon-name">${pokemon.name}</h2>
         <div class="pokemon-types">${createTypeBadges(pokemon.types)}</div>
@@ -178,7 +183,7 @@ function showDetailView(pokemonId) {
           </div>
         </div>
         
-        <!-- 注釈の追加 -->
+        <!-- 注釈 -->
         <p class="data-note">※ サンムーン時のデータ</p>
       </div>
     </div>
