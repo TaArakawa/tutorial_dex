@@ -1,0 +1,42 @@
+<!--
+  index.html
+  このファイルは、ポケモン図鑑アプリの「骨組み（構造）」を作るためのHTMLファイルです。
+  画面に何を表示するか（ヘッダー、カードを表示する場所など）を定義しています。
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <!-- スマホやタブレットなどのモバイル端末でも画面崩れしないようにする設定です -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>はじめてのポケモン図鑑</title>
+  
+  <!-- CSSファイル（見た目を整えるファイル）を読み込んでいます -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 1. ヘッダーエリア（画面の最上部） -->
+  <header class="app-header">
+    <h1>ポケモン図鑑</h1>
+  </header>
+
+  <!-- 2. メインコンテンツエリア（画面の中央） -->
+  <main class="app-main">
+    <!-- 
+      JavaScriptからポケモンのカードを動的に追加するための「空のコンテナ（入れ物）」です。
+      script.js でこの「pokemon-container」というIDを指定して、中にカードを入れていきます。
+    -->
+    <div id="pokemon-container" class="pokemon-container"></div>
+  </main>
+
+  <!-- 3. フッターエリア（画面の最下部） -->
+  <footer class="app-footer">
+    <p>&copy; 2026 ポケモン図鑑チュートリアル</p>
+  </footer>
+
+  <!-- JavaScriptファイル（動きやデータを処理するファイル）を読み込んでいます -->
+  <!-- bodyの閉じタグ直前で読み込むことで、HTMLの読み込みが完了してからJSを実行させます -->
+  <script src="script.js"></script>
+</body>
+</html>

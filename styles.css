@@ -1,0 +1,129 @@
+/*
+  styles.css
+  このファイルは、ポケモン図鑑アプリの「見た目（デザイン）」を指定するCSSファイルです。
+  色、サイズ、余白、配置などを調整して、ポップで使いやすい画面にします。
+*/
+
+/* --- 1. 全体共通のスタイル設定 --- */
+* {
+  box-sizing: border-box; /* 余白を含めたサイズ計算を分かりやすくする設定 */
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: #f4f7f6; /* 目に優しい少しグレーがかった白 */
+  color: #333333;           /* 文字の色（真っ黒ではなく濃いグレー） */
+  line-height: 1.6;
+}
+
+/* --- 2. ヘッダーのデザイン --- */
+.app-header {
+  background-color: #e3350d; /* ポケモンでおなじみの明るい赤色 */
+  color: #ffffff;            /* 文字の色は白 */
+  text-align: center;        /* 文字を中央寄せ */
+  padding: 20px;             /* 上下の内側の余白 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 下側に薄い影をつけて立体感を出します */
+}
+
+.app-header h1 {
+  font-size: 24px;
+  letter-spacing: 2px;       /* 文字の間隔を少し広げて読みやすく */
+}
+
+/* --- 3. メインエリアとコンテナ（カードの入れ物） --- */
+.app-main {
+  max-width: 1000px;         /* 画面が大きくなりすぎないように制限 */
+  margin: 40px auto;         /* 左右中央寄せ、上下に余白 */
+  padding: 0 20px;           /* 左右のスマホ用余白 */
+}
+
+/* カードを並べるコンテナ（基本はスマホ向けに縦並び） */
+.pokemon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;                 /* カードとカードのすき間 */
+}
+
+/* --- 4. ポケモンカード１枚ずつのデザイン --- */
+.pokemon-card {
+  background-color: #ffffff; /* カードの背景は白 */
+  border-radius: 16px;       /* 角を丸くしてポップに */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 周りに柔らかい影をつけます */
+  width: 100%;
+  max-width: 300px;          /* カードの横幅の最大値 */
+  padding: 24px;
+  text-align: center;
+  border: 2px solid #e0e0e0; /* 薄いグレーの枠線 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* アニメーションをなめらかにする設定 */
+}
+
+/* マウスを重ねた（ホバーした）ときの動き：Vibeコーディングで感動するポイント！ */
+.pokemon-card:hover {
+  transform: translateY(-8px); /* カードが上に少し浮き上がります */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* 影を強くして浮いている感を演出 */
+  border-color: #ffcb05;      /* 枠線の色をポケモンの黄色に変えます */
+}
+
+/* --- 5. カード内の各項目のデザイン --- */
+
+/* 図鑑番号（例: #001） */
+.pokemon-no {
+  font-size: 14px;
+  color: #888888;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+/* ポケモンの名前 */
+.pokemon-name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  color: #111111;
+}
+
+/* タイプのラベル（バッジ風） */
+.pokemon-type {
+  display: inline-block;
+  background-color: #30a7d7; /* 標準のタイプ背景（みず色系） */
+  color: #ffffff;
+  font-size: 12px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* ポケモンの特徴（説明文） */
+.pokemon-description {
+  font-size: 14px;
+  color: #666666;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* --- 6. フッターのデザイン --- */
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  color: #888888;
+  font-size: 12px;
+  margin-top: 40px;
+}
+
+/* --- 7. PC用のレスポンシブ対応（画面幅が600px以上の場合） --- */
+@media (min-width: 600px) {
+  .pokemon-container {
+    flex-direction: row;     /* 横並びにする */
+    justify-content: center; /* 中央に寄せる */
+    flex-wrap: wrap;         /* 画面が狭くなったら折り返す */
+  }
+  
+  .pokemon-card {
+    width: calc(33.333% - 16px); /* 3列に並ぶように幅を計算 */
+  }
+}
