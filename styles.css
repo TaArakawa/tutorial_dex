@@ -39,7 +39,7 @@ body {
   padding: 0 20px;           /* 左右のスマホ用余白 */
 }
 
-/* カードを並べるコンテナ（基本はスマホ向けに縦並び） */
+/* カードを並べるコンテナ */
 .pokemon-container {
   display: flex;
   flex-direction: column;
@@ -57,10 +57,11 @@ body {
   padding: 24px;
   text-align: center;
   border: 2px solid #e0e0e0; /* 薄いグレーの枠線 */
+  cursor: pointer;           /* マウスを乗せたときに指マークにする（クリックできることを伝えます） */
   transition: transform 0.2s ease, box-shadow 0.2s ease; /* アニメーションをなめらかにする設定 */
 }
 
-/* マウスを重ねた（ホバーした）ときの動き：Vibeコーディングで感動するポイント！ */
+/* マウスを重ねた（ホバーした）ときの動き */
 .pokemon-card:hover {
   transform: translateY(-8px); /* カードが上に少し浮き上がります */
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* 影を強くして浮いている感を演出 */
@@ -85,16 +86,38 @@ body {
   color: #111111;
 }
 
-/* タイプのラベル（バッジ風） */
+/* タイプの親要素 */
+.pokemon-types {
+  margin-bottom: 16px;
+}
+
+/* タイプのラベル（バッジ風）の基本設定 */
 .pokemon-type {
   display: inline-block;
-  background-color: #30a7d7; /* 標準のタイプ背景（みず色系） */
   color: #ffffff;
   font-size: 12px;
   padding: 4px 12px;
   border-radius: 20px;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin: 2px;
+}
+
+/* --- 【新機能】タイプごとの背景色 --- */
+.type-くさ {
+  background-color: #4fc337; /* みどり */
+}
+
+.type-どく {
+  background-color: #a040a0; /* 紫 */
+}
+
+.type-ほのお {
+  background-color: #ff9741; /* オレンジ */
+}
+
+.type-でんき {
+  background-color: #f6d235; /* 黄色 */
+  color: #333333;            /* 文字が見えやすいように文字色を黒に */
 }
 
 /* ポケモンの特徴（説明文） */
@@ -106,7 +129,126 @@ body {
   border-radius: 8px;
 }
 
-/* --- 6. フッターのデザイン --- */
+/* --- 6. 【新機能】詳細ページ用のデザイン --- */
+.detail-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* 戻るボタン */
+.back-button {
+  background-color: #333333;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #555555;
+}
+
+/* 詳細カードのレイアウト */
+.detail-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border: 2px solid #e0e0e0;
+  text-align: center;
+}
+
+/* 高さ・重さ情報 */
+.detail-info {
+  display: flex;
+  justify-content: space-around;
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.detail-info p {
+  font-size: 16px;
+}
+
+/* 能力値（種族値）のグラフエリア */
+.stats-container {
+  text-align: left;
+  margin-top: 20px;
+}
+
+.stats-container h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  border-left: 4px solid #e3350d;
+  padding-left: 8px;
+}
+
+/* 各ステータスの行 */
+.stat-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* ステータス名（HP、こうげき等） */
+.stat-label {
+  width: 70px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #555555;
+}
+
+/* ステータスの数値 */
+.stat-value {
+  width: 35px;
+  font-size: 13px;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+/* ゲージバーの背景 */
+.stat-bar-container {
+  flex-grow: 1;
+  background-color: #e0e0e0;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+/* ゲージバー本体 */
+.stat-bar {
+  background-color: #30a7d7; /* 基本カラー：水色 */
+  height: 100%;
+  border-radius: 6px;
+}
+
+/* HPや攻撃などのステータスバーを少し色分け（余力があれば） */
+.stat-row:nth-child(2) .stat-bar { background-color: #ff5959; } /* HP */
+.stat-row:nth-child(3) .stat-bar { background-color: #f5ac78; } /* こうげき */
+.stat-row:nth-child(4) .stat-bar { background-color: #fae078; } /* ぼうぎょ */
+.stat-row:nth-child(5) .stat-bar { background-color: #9db7f5; } /* とくこう */
+.stat-row:nth-child(6) .stat-bar { background-color: #a7db8d; } /* とくぼう */
+.stat-row:nth-child(7) .stat-bar { background-color: #fa92b2; } /* すばやさ */
+
+/* 注釈テキスト */
+.data-note {
+  font-size: 11px;
+  color: #999999;
+  text-align: right;
+  margin-top: 20px;
+  font-style: italic;
+}
+
+/* --- 7. フッターのデザイン --- */
 .app-footer {
   text-align: center;
   padding: 20px;
@@ -115,7 +257,7 @@ body {
   margin-top: 40px;
 }
 
-/* --- 7. PC用のレスポンシブ対応（画面幅が600px以上の場合） --- */
+/* --- 8. PC用のレスポンシブ対応（画面幅が600px以上の場合） --- */
 @media (min-width: 600px) {
   .pokemon-container {
     flex-direction: row;     /* 横並びにする */
